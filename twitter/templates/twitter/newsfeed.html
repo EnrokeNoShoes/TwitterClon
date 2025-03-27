@@ -86,21 +86,28 @@
                 </div>
 
                 <!-- Formulario -->
-                <form class="col pr-0" method="post">
+                <form method="post">
                     {% csrf_token %}
-                    {{ form.content}}
+                    {{ form.content }}
+                    <!-- Aquí mostramos el contador de caracteres -->
                     <div class="container d-flex" style="padding: 1rem 0 0 0;">
                         <div id="leftBtn">
                             <div id="charBadge" class="badge badge-pill badge-primary ml-2"
-                                style="display: flex;align-items: center;width: 50%;justify-content: center;">
-                                <div id="charCountArea">150</div>
+                                style="display: flex; align-items: center; width: 50%; justify-content: center;">
+                                <div id="charCountArea">280</div>
                             </div>
                         </div>
-
                         <div id="rightBtn">
                             <button class="btn rounded-pill" style="width: 100%;">Tweet</button>
                         </div>
                     </div>
+                
+                    <!-- Aquí mostramos los errores de validación -->
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endfor %}
+                    {% endfor %}
                 </form>
                 <!-- Formulario -->
 
@@ -116,13 +123,12 @@
             <!-- FOR LOOP HERE -->
             <div class="tweet-wrap" style="border-radius:20px">
                 <div class="tweet-header">
-                    <img src="{{ post.user.profile.image.url }}"
-                        alt="" class="avator">
+                    <img src="{{ post.user.profile.image.url }}" alt="" class="avator">
                     <div class="tweet-header-info">
                         <a href="{% url 'profile' post.user %}">
-                        {{ post.user.first_name }} </a><span>@{{ post.user }}</span><span> {{post.timestamp | naturaltime}}
-                        </span>
-                        <p>{{ post.content }} </p>
+                        {{ post.user.first_name }} </a><span>@{{ post.user }}</span><span> {{ post.timestamp | naturaltime }}</span>
+                        <!-- Aquí se aplica el estilo para ajustar el texto dentro del contenedor -->
+                        <p>{{ post.content }}</p>
                     </div>
                 </div>
                 <div class="tweet-info-counts">

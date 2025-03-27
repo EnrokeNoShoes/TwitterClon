@@ -1,0 +1,22 @@
+{% extends 'twitter/layout.html' %}
+
+{% block content %}
+<div class="container">
+    <h3>Resultados de la búsqueda para: "{{ query }}"</h3>
+
+    {% if users %}
+    <ul class="list-group">
+        {% for user in users %}
+        <li class="list-group-item">
+            <a href="{% url 'profile' user.username %}" style="text-decoration: none;">
+                <img src="{{ user.profile.image.url }}" alt="{{ user.username }}" width="30" class="rounded-circle">
+                {{ user.first_name }} {{ user.last_name }} (@{{ user.username }})
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No se encontraron resultados para tu búsqueda.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -6,14 +6,8 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 @login_required
-def home(request, username=None):
-    if username is None:  # Perfil del usuario autenticado
-        visited_user = request.user
-    else:  # Perfil de otro usuario
-        visited_user = get_object_or_404(User, username=username)
-    
-    visited_user_followers = visited_user.profile.followers()
-    visited_user_following = visited_user.profile.following()
+def home(request):
+
 
     followed_users = request.user.profile.following()  
     followed_users = followed_users | User.objects.filter(id=request.user.id) 
@@ -37,9 +31,7 @@ def home(request, username=None):
         form = PostForm()
 
     context = {'posts':posts, 'form': form,'users_to_follow': users_to_follow,'following_list': following_list,
-        'followers_list': followers_list,'visited_user': visited_user, 
-        'visited_user_followers': visited_user_followers, 
-        'visited_user_following': visited_user_following,}
+        'followers_list': followers_list,}
     return render(request, 'twitter/newsfeed.html', context)
 
 def register(request):
@@ -103,13 +95,8 @@ def unfollow(request, username):
     return redirect('home')
 
 
-def profile_search(request):
-    query = request.GET.get('q', '')
-    if query:
-        # Filtra los perfiles de usuario por username o nombre
-        profiles = User.objects.filter(username__icontains=query) | User.objects.filter(first_name__icontains=query)
-    else:
-        profiles = User.objects.none()  # No muestra perfiles si no hay búsqueda
-    
-    return render(request, 'twitter/profile_search_results.html', {'profiles': profiles, 'query': query})
+def search_users(request):
+    query = request.GET.get('query', '')  # Obtener el valor de la búsqueda desde la URL
+    users = User.objects.filter(username__icontains=query)  # Filtrar usuarios por nombre de usuario
+    return render(request, 'twitter/search_results.html', {'users': users, 'query': query})
 

@@ -2,9 +2,12 @@
 {% load humanize %}
 {% block content %}
 <div id="main" class="container-fluid d-flex">
+    
+
     <!-- Barra Izquierda -->
     <div class="sidebar m-5 d-none d-md-block">
         <div class="">
+  
             <div class="card " style="width: 18rem; text-align:center;border-radius: 20px;">
                 <img class="card-img-top rounded-circle"
                     style="width:60%; position: relative;left: 62px;padding-top: 20px;"
@@ -129,10 +132,10 @@
     <div class="sidebar m-5 d-none d-xl-block" style="flex: 0 0 18rem;">
         <div class="card" style="width: 18rem;">
             <div class="card-header">
-                Followers (Visitado)
+                Followers (Visitado) 
             </div>
             <ul class="list-group list-group-flush">
-                {% for follower in visited_user_followers %}
+                {% for follower in user.profile.followers %}
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <a href="{% url 'profile' follower.username %}" style="text-decoration: none;color: #657787;">
                             @{{ follower.username }}
@@ -150,7 +153,7 @@
                 Following (Visitado)
             </div>
             <ul class="list-group list-group-flush">
-                {% for following_user in visited_user_following %}
+                {% for following_user in user.profile.following %}
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <a href="{% url 'profile' following_user.username %}" style="text-decoration: none;color: #657787;">
                             @{{ following_user.username }}

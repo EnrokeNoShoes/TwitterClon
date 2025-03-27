@@ -34,9 +34,27 @@
                 </ul>
                 <!-- Nav Bar -->
                 {% if request.user.is_authenticated %}
+
+                <!-- Formulario de Búsqueda en el Navbar -->
+                <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'search_users' %}">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar usuario" aria-label="Search" name="query" required>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+
                 
                 <!-- Enlace a Inicio -->
-                    <a href="{% url 'home' %}" class="btn text-white my-2 my-sm-0" type="submit">Inicio</a>
+                {% if request.path != '/' and request.path != '/profile/{{ request.user.username }}' %}
+                    <!-- Si no estamos ni en la página de inicio ni en el perfil del usuario logueado -->
+                    <a href="{% url 'home' %}" class="btn text-white my-2 my-sm-0" type="submit">
+                        @{{ request.user.username }}
+                    </a>
+                {% else %}
+                    <!-- Si estamos en la página de inicio o en el perfil del usuario logueado -->
+                    <a href="{% url 'home' %}" class="btn text-white my-2 my-sm-0" type="submit">
+                        Inicio
+                    </a>
+                {% endif %}
+            
                     
                     <!-- Formulario de Logout -->
                     <form action="{% url 'logout' %}" method="post" style="display: inline;">
@@ -100,7 +118,7 @@
                             <div id="leftBtn">
                                 <div id="charBadge" class="badge badge-pill badge-primary ml-2"
                                     style="display: flex;align-items: center;width: 50%;justify-content: center;">
-                                    <div id="charCountArea">140</div>
+                                    <div id="charCountArea">280</div>
                                 </div>
                             </div>
 

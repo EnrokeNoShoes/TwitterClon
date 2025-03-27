@@ -58,7 +58,7 @@ img {
   max-width: 490px;
   background: #fff;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 10%;
   border-radius: 3px;
   padding: 30px;
   border-bottom: 1px solid #e6ecf0;
@@ -73,6 +73,9 @@ img {
 
 .tweet-header-info {
   font-weight: bold;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .tweet-header-info span {
@@ -82,8 +85,9 @@ img {
 }
 
 .tweet-header-info p {
+  width: 50%; 
   font-weight: normal;
-  margin-top: 5px;
+  margin-top: 2%;
 }
 
 .tweet-img-wrap {

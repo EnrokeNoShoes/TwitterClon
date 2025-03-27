@@ -14,4 +14,5 @@ urlpatterns = [
     path('editprofile/', views.editprofile, name = 'editprofile'),
     path('follow/<str:username>/', views.follow, name = 'follow'),
     path('unfollow/<str:username>/', views.unfollow, name = 'unfollow'),
+    path('search/', views.search_users, name='search_users'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

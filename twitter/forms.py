@@ -23,12 +23,26 @@ class UserRegisterForm(UserCreationForm):
         return email
 
 class PostForm(forms.ModelForm):
-    content = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control w-100',
-                                                           'id': 'contentsBox', 'rows':'3',
-                                                           'placeholder':'Que esta Pasando'}))
+    content = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'class': 'form-control w-100',
+            'id': 'contentsBox',
+            'rows': '3',
+            'placeholder': '¿Qué está pasando?'
+        })
+    )
+
     class Meta:
         model = Post
         fields = ['content']
+
+    def clean_content(self):
+        content = self.cleaned_data.get('content')
+        # Validamos que el contenido no exceda los 280 caracteres
+        if len(content) > 280:
+            raise forms.ValidationError("El contenido del post no puede exceder los 280 caracteres.")
+        return content
+
 
 class UserUpdateForm(forms.ModelForm):
     class Meta:
