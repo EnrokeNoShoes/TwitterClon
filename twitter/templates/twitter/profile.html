@@ -20,22 +20,21 @@
                         {{ user.profile.followers.count}} Followers
                         {{ user.profile.following.count}} Following
                     </h6>
-                    {% if request.user.is_authenticated %}
-                        {% if user.username != request.user.username %}
-                            {% if user not in request.user.profile.following %}
-                                <a href="{% url 'follow' user %}" class = "btn text-white rounded-pill">Seguir</a>
-                            {% else %}
-                                <a href="{% url 'unfollow' user %}" class = "btn text-white rounded-pill">Dejar de Seguir</a>
-                            {% endif %}
-                        {% endif %}    
+
+                    {% if user not in request.user.profile.following %}
+                        <a href="{% url 'follow' user.username %}" class="btn text-white rounded-pill">Follow</a>
+                    {% else %}
+                        <a href="{% url 'unfollow' user.username %}" class="btn text-white rounded-pill">Unfollow</a>
                     {% endif %}
                     
                 </div>
 
             </div>
-            <a href="{% url 'editprofile' %}" id="addATweetLeft" type="button"
-                style="border-radius: 30px; font-size: 1.1rem; font-weight:bold;"
-                class="btn btn-lg btn-block mt-4 text-white ">Editar mi perfil</a>
+            {% if user == request.user %}
+                    <a href="{% url 'editprofile' %}" id="addATweetLeft" type="button"
+                    style="border-radius: 30px; font-size: 1.1rem; font-weight:bold;"
+                    class="btn btn-lg btn-block mt-4 text-white ">Editar mi perfil</a>
+            {% endif %}
         </div>
     </div>
     <!-- End Barra Izquierda -->
@@ -43,7 +42,7 @@
     <!-- Center -->
     <div class="content">
 
-
+         {% if posts %}
         <!-- Tweets -->
          {% for post in posts %}
         <div id="tweetCards">
@@ -113,6 +112,11 @@
             </div>
             <!-- FOR LOOP HERE -->
             {% endfor %}
+        {% else %}
+        <div class="tweet-wrap" style="border-radius:20px">
+            <p class="text-center" style="font-size: 1rem; color: #657786;">Este usuario no tiene publicaciones aún.</p>
+        </div>
+        {% endif %}
         </div>
         <!-- EndTweets -->
 
@@ -122,18 +126,39 @@
 
 
     <!-- Barra Derecha -->
-    <div class="sidebar m-5 d-none d-xl-block">
+    <div class="sidebar m-5 d-none d-xl-block" style="flex: 0 0 18rem;">
         <div class="card" style="width: 18rem;">
             <div class="card-header">
-                Who to Follow
+                Followers (Visitado)
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><a href="#" style="text-decoration: none;color: #657787;">@mundopython</a>
-                </li>
-                <li class="list-group-item"><a href="#" style="text-decoration: none;color: #657787;">@mundopython</a>
-                </li>
-                <li class="list-group-item"><a href="#" style="text-decoration: none;color: #657787;">@mundopython</a>
-                </li>
+                {% for follower in visited_user_followers %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="{% url 'profile' follower.username %}" style="text-decoration: none;color: #657787;">
+                            @{{ follower.username }}
+                        </a>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item">Este usuario no tiene seguidores aún.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <!-- Lista de seguidos -->
+        <div class="card mt-4" style="width: 18rem;">
+            <div class="card-header">
+                Following (Visitado)
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for following_user in visited_user_following %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="{% url 'profile' following_user.username %}" style="text-decoration: none;color: #657787;">
+                            @{{ following_user.username }}
+                        </a>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item">Este usuario no sigue a nadie aún.</li>
+                {% endfor %}
             </ul>
         </div>
     </div>

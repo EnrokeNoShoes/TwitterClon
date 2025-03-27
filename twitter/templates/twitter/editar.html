@@ -22,6 +22,13 @@
                     <div class="input-wrapper">
                         <label for="user-name-id">Username</label>
                         {{ u_form.username }}
+                        {% if u_form.username.errors %}
+                            <div class="error-message">
+                                {% for error in u_form.username.errors %}
+                                    <p>El usuario ya existe</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="input-wrapper">
                         <label>Bio</label>

@@ -1,7 +1,6 @@
 {% extends 'twitter/layout.html' %}
 
 {% block content %}
-
 <body class="login-page">
     <div class="twitter-login-box">
         <header>
@@ -13,32 +12,46 @@
         <form method="post">
             {% csrf_token %}
             <div class="input-wrapper">
-                <label for="user-name-id">First Name</label>
+                <label for="first_name">First Name</label>
                 {{ form.first_name }}
+                {% if form.first_name.errors %}
+                    <div class="error">{{ form.first_name.errors }}</div>
+                {% endif %}
             </div>
             <div class="input-wrapper">
-                <label for="user-name-id">Username</label>
+                <label for="username">Username</label>
                 {{ form.username }}
+                {% if form.username.errors %}
+                    <div class="error">{{ form.username.errors }}</div>
+                {% endif %}
             </div>
             <div class="input-wrapper">
-                <label for="user-name-id">Email</label>
+                <label for="email">Email</label>
                 {{ form.email }}
+                {% if form.email.errors %}
+                    <div class="error">{{ form.email.errors }}</div>
+                {% endif %}
             </div>
-
             <div class="input-wrapper">
-                <label for="password-id">Password</label>
+                <label for="password1">Password</label>
                 {{ form.password1 }}
+                {% if form.password1.errors %}
+                    <div class="error">{{ form.password1.errors }}</div>
+                {% endif %}
             </div>
             <div class="input-wrapper">
-                <label for="password-id">Confirm Password</label>
+                <label for="password2">Confirm Password</label>
                 {{ form.password2 }}
+                {% if form.password2.errors %}
+                    <div class="error">{{ form.password2.errors }}</div>
+                {% endif %}
             </div>
 
             <button class="twitter-btn">Registrarse</button>
         </form>
 
         <div class="footer">
-            <a href="#">¿Ya tienes una cuenta? Login</a>
+            <a href="{% url 'login' %}">¿Ya tienes una cuenta? Login</a>
         </div>
 
     </div>

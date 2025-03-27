@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What's happening?</title>
+    <title>Clon Twitter</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet">
@@ -21,7 +21,7 @@
 
     <div class="container-fluid" style="padding: 0;">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" style="color: white;" href="#">
+            <a class="navbar-brand" style="color: white;" href="{% url 'home' %}">
                 <!-- Twitter logo -->
                 <img src="{% static 'img/twitter-brands.svg' %}" width="30" height="30" class="d-inline-block align-top"
                     alt="">
@@ -33,8 +33,17 @@
 
                 </ul>
                 <!-- Nav Bar -->
-                <a href="{% url 'home' %}" class="btn text-white my-2 my-sm-0" type="submit">Inicio</a>
-                <a href="{% url 'logout' %}" class="btn text-white my-2 my-sm-0" type="submit">Logout</a>
+                {% if request.user.is_authenticated %}
+                
+                <!-- Enlace a Inicio -->
+                    <a href="{% url 'home' %}" class="btn text-white my-2 my-sm-0" type="submit">Inicio</a>
+                    
+                    <!-- Formulario de Logout -->
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn text-white my-2 my-sm-0">Logout</button>
+                    </form>
+                {% endif %}
                 <!-- Nav Bar -->
             </div>
         </nav>

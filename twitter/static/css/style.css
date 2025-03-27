@@ -229,4 +229,23 @@ a:link {
 }
 
 
+/*MENSAJE DE ERROR*/
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  padding: 5px;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+}
+
+.input-wrapper input:invalid {
+  border: 1px solid red;
+}
+
+.error-icon {
+  margin-right: 5px;
+  color: #dc3545;
+}
 
