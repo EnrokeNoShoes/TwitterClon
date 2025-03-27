@@ -21,7 +21,7 @@
   </ul>
 		 </p>
 <p>Y levantamos el servicio<br>
- &nbsp;	- python manage.py runserver</p> <b>
+ &nbsp;	- python manage.py runserver</p> <br>
   ![imagen](https://github.com/user-attachments/assets/3f9f6785-7e9f-4925-bccf-fb1fbf579efc)
 <h3>Levantar el servicio en Windows</h3>
 <p>Corroboramos que tengamos Python instalado</p>
