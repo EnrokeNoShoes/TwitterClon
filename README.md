@@ -51,7 +51,7 @@
   </ul>
 </p>
 <p>Corremos el servicio <br>
-&nbsp;	- python manage.py runserver <be>
+&nbsp;	- python manage.py runserver <br>
 	![imagen](https://github.com/user-attachments/assets/5dde7668-053f-4ff5-ad5b-d2db391a6884)
 </p>
 
