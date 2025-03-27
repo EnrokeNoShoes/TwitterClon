@@ -32,11 +32,11 @@
 &nbsp;	- pip install django
 </p>
 <p>Intalamos las dependencias que contiene nuestro archivo requirement <br>
-&nbsp;	- pip install -r requirements.txt <b>
+&nbsp;	- pip install -r requirements.txt <br>
 	![imagen](https://github.com/user-attachments/assets/dccf469d-52e5-47b7-8d02-6411a6ad0f9f)
 </p>
 <p>Intalamos las dependencias que contiene nuestro archivo requirement <br>
-&nbsp;	- pip install -r requirements.txt
+&nbsp;	- pip install -r requirements.txt <br>
 	![imagen](https://github.com/user-attachments/assets/dccf469d-52e5-47b7-8d02-6411a6ad0f9f)
 </p>
 <p>Caso de que no este el sqlLite<br>
@@ -51,7 +51,7 @@
   </ul>
 </p>
 <p>Corremos el servicio <br>
-&nbsp;	- python manage.py runserver
+&nbsp;	- python manage.py runserver <be>
 	![imagen](https://github.com/user-attachments/assets/5dde7668-053f-4ff5-ad5b-d2db391a6884)
 </p>
 
